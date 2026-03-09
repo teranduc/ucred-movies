@@ -1,0 +1,10 @@
+- name: Empaquetar proyecto con Maven
+  id: maven_package  # id opcional
+  if: success() # por defecto siempre es success
+  run: mvn clean package -DskipTests
+  working-directory: <path>  # opcional
+  shell: bash
+  env:  # variables de entorno para este Step
+    MAVEN_OPTS: "-Xmx1024m"  
+  continue-on-error: true
+  timeout-minutes: 15
