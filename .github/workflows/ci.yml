@@ -1,10 +1,23 @@
-- name: Empaquetar proyecto con Maven
-  id: maven_package  # id opcional
-  if: success() # por defecto siempre es success
-  run: mvn clean package -DskipTests
-  working-directory: <path>  # opcional
-  shell: bash
-  env:  # variables de entorno para este Step
-    MAVEN_OPTS: "-Xmx1024m"  
-  continue-on-error: true
-  timeout-minutes: 15
+name: Java Maven Build
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Compilar y empaquetar
+        run: mvn clean package
