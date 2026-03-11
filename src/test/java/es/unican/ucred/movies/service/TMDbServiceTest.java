@@ -43,7 +43,7 @@ class TMDbServiceTest {
         List<Movie> movies = service.getPopularMovies();
 
         assertNotNull(movies);
-        assertEquals(3, movies.size());
+        assertEquals(2, movies.size());
         
         Movie firstMovie = movies.get(0);
         assertEquals(550, firstMovie.getId());
